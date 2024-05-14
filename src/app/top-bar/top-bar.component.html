@@ -1,0 +1,9 @@
+<div class="sticky top-0 flex flex-row justify-between px-6 py-2 bg-sky-400 ">
+  <div class="text-stone-50 uppercase font-bold text-2xl hover:cursor-pointer" routerLink="/">
+    <h1>Todo App</h1>
+  </div>
+
+  <div class="text-lg bg-white rounded" *ngIf="!location.path().toString().includes('task')">
+    <button mat-raised-button (click)="openDialog()" class="p-2">Add new task</button>
+  </div>
+</div>

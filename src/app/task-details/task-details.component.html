@@ -1,0 +1,61 @@
+<div *ngIf="!notFoundTask">
+  <div class="flex flex-row justify-between px-6 pt-4 pb-2">
+    <h2 class="pl-0" mat-dialog-title>TASK DETAILS</h2>
+    <div class="flex flex-row justify-end">
+      <button mat-raised-button type="button" (click)="onReset()" class="mr-2">
+        Reset
+      </button>
+      <button
+        mat-raised-button
+        type="submit"
+        (click)="onSubmit()"
+        style="background-color: #38bdf8"
+        [disabled]="taskForm.invalid"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+  <div mat-dialog-content class="px-6">
+    <form class="flex flex-col" (ngSubmit)="onSubmit()" [formGroup]="taskForm">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          required
+          placeholder="Name"
+          type="text"
+          name="name"
+          formControlName="name"
+          [readonly]="taskForm.value.status === 'doneTaskList'"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          placeholder="Description"
+          rows="12"
+          name="description"
+          formControlName="description"
+          [readonly]="taskForm.value.status === 'doneTaskList'"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select
+          matInput
+          required
+          formControlName="status"
+        >
+          <mat-option *ngFor="let status of statusList" [value]="status.value">
+            {{ status.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+</div>
+<div *ngIf="notFoundTask" class="pt-5 text-center text-xl">
+  <p>Task not found !</p>
+</div>
